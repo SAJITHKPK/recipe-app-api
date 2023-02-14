@@ -19,3 +19,4 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+# This is a new line that ends the file.
