@@ -10,6 +10,7 @@ services:
       - "8000:8000"
     volumes:
       - ./app:/app
+      - dev-static-data:/vol/web
     command: >
       sh -c "python manage.py wait_for_db &&
              python manage.py migrate &&
@@ -19,6 +20,7 @@ services:
       - DB_NAME=devdb
       - DB_USER=devuser
       - DB_PASS=changeme
+      - DEBUG=1
     depends_on:
       - db
 
@@ -32,7 +34,7 @@ services:
       - POSTGRES_PASSWORD=changeme
     ports:
       - "5432:5432"
-  
+
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin4_container
@@ -43,8 +45,9 @@ services:
       PGADMIN_DEFAULT_EMAIL: sajith.kp@zaimus.com
       PGADMIN_DEFAULT_PASSWORD: Sajith@7051
     volumes:
-      - pgadmin-data:/var/lib/pgadmin 
+      - pgadmin-data:/var/lib/pgadmin
 
 volumes:
   dev-db-data:
+  dev-static-data:
   pgadmin-data:
